@@ -1,6 +1,4 @@
-<%-include('./partials/header')%>
-<%-include('./partials/navbar')%>
-
+<%-include('../partials/header')%>
 
 
 <div class="row" style="margin-top: 80px;">
@@ -8,11 +6,11 @@
         <h1 class="display-6">Sign-up Form</h1>
         <form action="/signup" method="POST">
             <div class="mb-3">
-                <label for="email" class="form-label">email: </label>
-                <input type="text" class="form-control" name="email" id="email" placeholder="Name of User" required>
+                <label for="username" class="form-label">Username: </label>
+                <input type="text" class="form-control" name="username" id="username" placeholder="Enter Username" required>
             </div>
             <div class="mb-3">
-                <label for="mail" class="form-label">email: </label>
+                <label for="mail" class="form-label">Email: </label>
                 <input type="email" class="form-control" name="email" id="mail" placeholder="email of the user" required>
             </div>
             <div class="mb-3">
@@ -27,4 +25,4 @@
 
 
 <script src="/js/script.js"></script>
-<%-include('./partials/footer')%>
+<%-include('../partials/footer')%>

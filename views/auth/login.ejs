@@ -1,6 +1,4 @@
-<%-include('./partials/header')%>
-<%-include('./partials/navbar')%>
-
+<%-include('../partials/header')%>
 
 
 <div class="row" style="margin-top: 80px;">
@@ -8,8 +6,8 @@
         <form action="/login" method="POST">
             <h1 class="display-6">Login Form</h1>
              <div class="mb-3">
-                <label for="mail" class="form-label">email: </label>
-                <input type="email" class="form-control" name="email" id="mail" placeholder="email of the user" required>
+                <label for="username" class="form-label">Username: </label>
+                <input type="text" class="form-control" name="username" id="username" placeholder="Enter User Name" required>
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Password: </label>
@@ -23,4 +21,4 @@
 
 
 <script src="/js/script.js"></script>
-<%-include('./partials/footer')%>
+<%-include('../partials/footer')%>

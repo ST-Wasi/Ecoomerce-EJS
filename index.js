@@ -6,14 +6,14 @@ const flash = require('connect-flash');
 const methodoverride = require("method-override");
 const mongoose = require("mongoose");
 const productRoutes = require("./Routes/product");
-const userRoutes = require("./Routes/user");
 const globalRoutes = require('./Routes/global');
 const cookieParser = require('cookie-parser')
 const adminRoutes = require('./Routes/admin');
 const authRoutes = require('./Routes/auth')
 const revireRoutes = require('./Routes/review')
-const dotenv = require("dotenv");
-dotenv.config();
+const passport = require('passport')
+const LocalStrategy = require('passport-local')
+const User = require("./models/User");
 
 // db connect
 mongoose
@@ -30,7 +30,6 @@ mongoose
   });
 
 // session configuration for middleware
-
 let configSession = {
   secret: 'keyboard cat',
   resave: false,
@@ -50,8 +49,19 @@ app.use(cookieParser())
 app.use(session(configSession))
 app.use(flash());
 
-// routes
-app.use(userRoutes);
+app.use(passport.initialize())
+app.use(passport.session())
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+passport.use(new LocalStrategy(User.authenticate()));
+
+app.use((req,res,next)=>{
+  res.locals.success = req.flash('success');
+  res.locals.error = req.flash('error');
+  next();
+})
+
 app.use(productRoutes);
 app.use(globalRoutes);
 app.use(adminRoutes);
