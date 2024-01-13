@@ -1,0 +1,30 @@
+<%-include('./partials/header')%>
+<%-include('./partials/navbar')%>
+
+
+
+<div class="row" style="margin-top: 80px;">
+    <div class="col-6 mx-auto">
+        <h1 class="display-6">Sign-up Form</h1>
+        <form action="/signup" method="POST">
+            <div class="mb-3">
+                <label for="email" class="form-label">email: </label>
+                <input type="text" class="form-control" name="email" id="email" placeholder="Name of User" required>
+            </div>
+            <div class="mb-3">
+                <label for="mail" class="form-label">email: </label>
+                <input type="email" class="form-control" name="email" id="mail" placeholder="email of the user" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password: </label>
+                <input type="password" class="form-control" name="password" id="password" placeholder="password of the user" required>
+            </div>
+            <button type="submit" class="btn btn-sm btn-success">Signup</button>
+            <p class="mt-2">already have an account? <a href="/login">Login now</a></p>
+        </form>
+    </div>
+</div>
+
+
+<script src="/js/script.js"></script>
+<%-include('./partials/footer')%>

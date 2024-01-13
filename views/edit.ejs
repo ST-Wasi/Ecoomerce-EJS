@@ -1,0 +1,21 @@
+<%-include('./partials/header')%>
+<%-include('./partials/navbar')%>
+
+    <h1>Edit Product</h1>
+    <form action="/product/<%=product._id%>?_method=PATCH" method="post">
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name" placeholder="Enter product name" value="<%=product.name%>" required>
+
+        <label for="price">Price:</label>
+        <input type="number" name="price" id="price" placeholder="Enter product price" value="<%=product.price%>" required>
+
+        <label for="image">Image: </label>
+        <input type="text" name="image" id="image" placeholder="Enter product image url" value="<%=product.image%>" required>
+
+        <label for="description">Description: </label>
+        <input type="text" name="description" id="description" placeholder="Enter product description" value="<%=product.description%>" required>
+
+        <button type="submit">Edit Product</button>
+    </form>
+
+<%-include('./partials/footer')%>

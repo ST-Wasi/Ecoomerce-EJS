@@ -1,0 +1,30 @@
+<%-include('./partials/header')%>
+<%-include('./partials/navbar')%>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+            <a class="navbar-brand" href="#">Wasi</a>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/home">Home</a>
+              </li>
+            </ul>
+            <div class="d-flex">
+              <a class="btn btn-outline-success" href="/login">Login/Signup</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light hfullvh">
+        <div class="col-md-5 p-lg-5 mx-auto my-5">
+          <h1 class="display-4 font-weight-normal">Wasi's First Templating Ecommerce Web App</h1>
+          <p class="lead font-weight-normal">And an even wittier subheading to boot. Jumpstart your marketing efforts with this example based on Apple's marketing pages.</p>
+          <a class="btn btn-outline-secondary" href="/login">Get Started</a>
+        </div>
+        <div class="product-device box-shadow d-none d-md-block"></div>
+        <div class="product-device product-device-2 box-shadow d-none d-md-block"></div>
+      </div>
+<%-include('./partials/footer')%>

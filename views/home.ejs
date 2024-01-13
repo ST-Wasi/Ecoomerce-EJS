@@ -1,0 +1,23 @@
+<%-include('./partials/header')%>
+<%-include('./partials/navbar')%>
+<%-include('./partials/flash')%>
+
+<div class="container">
+  <h1 class="text-center mt-5 mb-4">All Products</h1>
+  <div class="d-flex flex-wrap justify-content-center">
+    <% for(let item of data){ %>
+      <div class="card m-2" style="width: 18rem;">
+        <img src="<%=item.image%>" class="card-img-top" alt="<%=item.name%>">
+        <div class="card-body">
+          <h5 class="card-title"><%=item.name%></h5>
+          <h5 class="card-title"><%=item.price%></h5>
+          <p class="card-text"><%=item.description%></p>
+          <a href="/product/<%=item._id%>" class="btn btn-primary">View Details</a>
+          <a href="/product/<%=item._id%>/edit" class="btn btn-primary">Edit Product</a>
+        </div>
+      </div>
+    <% } %>
+  </div>
+</div>
+
+<%-include('./partials/footer')%>
