@@ -31,11 +31,11 @@ router.post('/admin/dashboard/login', async (req,res)=>{
     const token = jwt.sign({email},process.env.SECRET_KEY,{
         expiresIn: '1h'
     });
-    // res.status(200).json({token});
+
     res
   .status(201)
   .cookie('access_token', token, {
-    expires: new Date(Date.now() + 1 * 3600000) // cookie will be removed after 1 hours
+    expires: new Date(Date.now() + 1 * 3600000)
   })
   .redirect('/home')
     } catch (error) {

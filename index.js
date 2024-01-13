@@ -8,9 +8,8 @@ const mongoose = require("mongoose");
 const productRoutes = require("./Routes/product");
 const globalRoutes = require('./Routes/global');
 const cookieParser = require('cookie-parser')
-const adminRoutes = require('./Routes/admin');
 const authRoutes = require('./Routes/auth')
-const revireRoutes = require('./Routes/review')
+const reviewRoutes = require('./Routes/review')
 const passport = require('passport')
 const LocalStrategy = require('passport-local')
 const User = require("./models/User");
@@ -64,6 +63,5 @@ app.use((req,res,next)=>{
 
 app.use(productRoutes);
 app.use(globalRoutes);
-app.use(adminRoutes);
-app.use(revireRoutes);
+app.use(reviewRoutes);
 app.use(authRoutes);
