@@ -28,6 +28,13 @@ function(req,res){
     req.flash('success', 'Welcome Back')
     res.redirect('/home')
 }
-)
+);
+
+router.get('/logout',(req,res)=>{
+    req.logout(()=>{
+        req.flash("success",'loged out sucesfully')
+    })
+    res.redirect('/login')
+})
 
 module.exports = router;
