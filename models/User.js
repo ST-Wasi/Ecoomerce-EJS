@@ -1,4 +1,3 @@
-const { required } = require('joi');
 const mongoose = require('mongoose');
 const passportLocalMongoose = require('passport-local-mongoose');
 
@@ -13,6 +12,12 @@ const userSchema = new mongoose.Schema({
         default: 'buyer',
         required: true
     },
+    cart:[
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Product'
+        }
+    ]
 })
 
 userSchema.plugin(passportLocalMongoose);

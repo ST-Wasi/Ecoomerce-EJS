@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const {productSchema,reviewSchema} = require('../schema');
 const Product = require("../models/Product");
+const User = require("../models/User");
 
 const verifyToken = async (req, res, next) => {
   try {
@@ -77,4 +78,12 @@ const isProductAuther = async (req,res,next)=>{
   next();
 }
 
-module.exports = {verifyToken,validateProduct,validateReview,isLoggedIn,isSeller,isProductAuther};
+const isProductInCart = async (req,res,next)=>{
+  const {id} = req.params;
+  console.log(id);
+  console.log("user",req.user)
+  console.log(id.equals(req.user._id))
+  next();
+}
+
+module.exports = {verifyToken,validateProduct,validateReview,isLoggedIn,isSeller,isProductAuther,isProductInCart};
