@@ -1,3 +1,4 @@
+
 const mongoose = require("mongoose");
 
 const productSchema = new mongoose.Schema({
@@ -27,6 +28,10 @@ const productSchema = new mongoose.Schema({
       ref: "Review",
     },
   ],
+  author:{
+    type:mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }
 });
 
 const Product = mongoose.model("Product", productSchema);

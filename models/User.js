@@ -1,3 +1,4 @@
+const { required } = require('joi');
 const mongoose = require('mongoose');
 const passportLocalMongoose = require('passport-local-mongoose');
 
@@ -7,12 +8,11 @@ const userSchema = new mongoose.Schema({
         trim: true,
         required: true
     },
-    pruducts:[
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Product",
-        }
-    ]
+    role:{
+        type:String,
+        default: 'buyer',
+        required: true
+    },
 })
 
 userSchema.plugin(passportLocalMongoose);

@@ -9,10 +9,10 @@ router.get('/signup',(req,res)=>{
 
 router.post('/signup',async (req,res)=>{
     console.log(req.body)
-    let {username,password,email} = req.body;
-    const user = new User({username,email})
+    let {username,password,role,email} = req.body;
+    const user = new User({username,role,email})
     let newUser  = await User.register(user,password)
-    res.send(newUser)
+    res.redirect('/login')
 })
 
 router.get('/login',(req,res)=>{

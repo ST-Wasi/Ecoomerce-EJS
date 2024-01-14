@@ -59,8 +59,8 @@ router.patch('/product/:id',isLoggedIn, async (req,res)=>{
 
 router.post('/products',isLoggedIn, validateProduct, async (req, res) => {
   try {
-    const { name, image, price, description } = req.body;
-    await Product.create({ name, image, price, description });
+    const { name, image, price, description,author } = req.body;
+    await Product.create({ name, image, price, description,author:req.user._id });
     res.cookie('name','wasi');
     res.redirect('/home');
   } catch (error) {
