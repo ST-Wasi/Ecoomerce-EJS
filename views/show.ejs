@@ -11,7 +11,9 @@
       <p class="card-text"><%=item.description%></p>
       <a href="/home" class="btn btn-primary">Return Hone</a>
       <form action="/product/<%=item._id%>/delete?_method=DELETE" method="post">
+        <%if(currentUser && currentUser.role === 'seller'){%>
         <button type="submit">Delete Product</button>
+        <%}%>
       </form>
     </div>
   </div>
