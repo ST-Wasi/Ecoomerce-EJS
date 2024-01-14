@@ -19,6 +19,16 @@
         
         </ul>
         <div class="d-flex" role="search">
+         <% if(currentUser){ %>
+            <ul class="navbar-nav ms-auto d-none d-lg-inline-flex">
+              <li class="nav-item mx-2">
+                <a href="/cart" style="color: black;">
+                <i class="fa cart-sup-number" style="font-size:24px">&#xf07a;</i></a>
+    <span class='badge badge-warning' id='lblCartCount'> <%=currentUser.cart.length%> </span>
+              </li>
+            </ul>
+         <% } %>
+          
           <% if(currentUser){ %>
             <a class="mx-2" href="/logout"><button class="btn btn-outline-info" type="submit">Logout</button></a>
           <% } else{ %>
