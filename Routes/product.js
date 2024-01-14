@@ -1,11 +1,11 @@
 const express = require("express");
 const Product = require("../models/Product");
 const router = express.Router();
-const { validateProduct } = require("../middlewares/middleware");
+const { validateProduct,isLoggedIn } = require("../middlewares/middleware");
 const Review = require("../models/Review");
 
 
-router.get('/product/:id/edit', async (req,res)=>{
+router.get('/product/:id/edit',isLoggedIn, async (req,res)=>{
   try {
     const {id} = req.params;
   const product = await Product.findById(id);
@@ -17,14 +17,14 @@ router.get('/product/:id/edit', async (req,res)=>{
   
 })
 
-router.get('/product/new',(req,res)=>{
+router.get('/product/new',isLoggedIn,(req,res)=>{
   res.render('new');
 })
 
 router.get("/home", async (req, res) => {
   try {
     const data = await Product.find({});
-    return res.render("home", { data, success:req.flash('success') });
+    return res.render("home", { data});
   } catch (error) {
     return res.status(400).json({ message: `Internal Server Error: ${error}` });
   }
@@ -32,18 +32,18 @@ router.get("/home", async (req, res) => {
 
 
 
-router.get('/product/:id',async(req,res)=>{
+router.get('/product/:id',isLoggedIn,async(req,res)=>{
   try {
     const {id} = req.params;
   const item = await Product.findById(id).populate('reviews');
-  res.render('show',{item, success: req.flash('success')});
+  res.render('show',{item});
   } catch (e) {
     res.render('error',{err:e.message});
   }
   
 })
 
-router.patch('/product/:id', async (req,res)=>{
+router.patch('/product/:id',isLoggedIn, async (req,res)=>{
   try {
     const {name, price, image, description} = req.body;
   const {id} = req.params;
@@ -57,7 +57,7 @@ router.patch('/product/:id', async (req,res)=>{
   
 })
 
-router.post('/products', validateProduct, async (req, res) => {
+router.post('/products',isLoggedIn, validateProduct, async (req, res) => {
   try {
     const { name, image, price, description } = req.body;
     await Product.create({ name, image, price, description });
@@ -69,7 +69,7 @@ router.post('/products', validateProduct, async (req, res) => {
   }
 });
 
-router.delete('/product/:id/delete', async (req,res)=>{
+router.delete('/product/:id/delete',isLoggedIn, async (req,res)=>{
   try {
     const {id} = req.params;
   const product = await Product.findById(id);

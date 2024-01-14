@@ -38,4 +38,12 @@ const validateReview = (req,res,next)=>{
   next();
 }
 
-module.exports = {verifyToken,validateProduct,validateReview};
+const isLoggedIn = (req,res,next)=>{
+  if(!req.isAuthenticated()){
+    req.flash('error','You Are Not Loggedin. PLease Login');
+    res.redirect('/login')
+  }
+  next();
+}
+
+module.exports = {verifyToken,validateProduct,validateReview,isLoggedIn};

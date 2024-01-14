@@ -13,6 +13,17 @@
                 <label for="mail" class="form-label">Email: </label>
                 <input type="email" class="form-control" name="email" id="mail" placeholder="email of the user" required>
             </div>
+
+            <div class="btn-group">
+                Select Account Type: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio" class="btn-check" name="options" id="buyer" autocomplete="off" />
+                <label class="btn btn-secondary" for="buyer" data-mdb-ripple-init>Buyer</label>
+              
+                <input type="radio" class="btn-check" name="options" id="seller" autocomplete="off" checked/>
+                <label class="btn btn-secondary" for="seller" data-mdb-ripple-init>Seller</label>
+
+              </div>
+
             <div class="mb-3">
                 <label for="password" class="form-label">Password: </label>
                 <input type="password" class="form-control" name="password" id="password" placeholder="password of the user" required>

@@ -22,10 +22,10 @@ router.get('/login',(req,res)=>{
 router.post('/login',
 passport.authenticate('local',{
     failureRedirect: '/login',
-    failureMessage: true
+    failureFlash: true
 }),
 function(req,res){
-    req.flash('success', 'Welcome Back')
+    req.flash('success', `Welcome Back ${req.user.username}`)
     res.redirect('/home')
 }
 );

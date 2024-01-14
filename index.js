@@ -33,6 +33,11 @@ let configSession = {
   secret: 'keyboard cat',
   resave: false,
   saveUninitialized: true,
+  cookie:{
+    httpOnly: true,
+    expires: Date.now()+ 7*24*60*60*1000,
+    maxAge: 7*24*60*60*1000
+  }
 };
 
 // view engine
@@ -56,6 +61,7 @@ passport.deserializeUser(User.deserializeUser());
 passport.use(new LocalStrategy(User.authenticate()));
 
 app.use((req,res,next)=>{
+  res.locals.currentUser = req.user;
   res.locals.success = req.flash('success');
   res.locals.error = req.flash('error');
   next();
