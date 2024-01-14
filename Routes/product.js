@@ -1,86 +1,104 @@
 const express = require("express");
 const Product = require("../models/Product");
 const router = express.Router();
-const { validateProduct,isLoggedIn } = require("../middlewares/middleware");
+const { validateProduct, isLoggedIn, isSeller,isProductAuther } = require("../middlewares/middleware");
 const Review = require("../models/Review");
 
-
-router.get('/product/:id/edit',isLoggedIn, async (req,res)=>{
+router.get('/product/:id/edit', isLoggedIn,isSeller,isProductAuther, async (req, res) => {
   try {
-    const {id} = req.params;
-  const product = await Product.findById(id);
-  res.render('edit',{product})
+    const { id } = req.params;
+    const product = await Product.findById(id);
+    if (!product) {
+      req.flash('error', 'Product not found');
+      return res.redirect('/home');
+    }
+    res.render('edit', { product });
   } catch (error) {
-    console.log(error);
-    res.redirect('/home')
+    console.error(error);
+    req.flash('error', 'Internal Server Error');
+    res.redirect('/home');
   }
-  
-})
+});
 
-router.get('/product/new',isLoggedIn,(req,res)=>{
+router.get('/product/new', isLoggedIn,isSeller, (req, res) => {
   res.render('new');
-})
+});
 
 router.get("/home", async (req, res) => {
   try {
     const data = await Product.find({});
-    return res.render("home", { data});
+    return res.render("home", { data });
   } catch (error) {
-    return res.status(400).json({ message: `Internal Server Error: ${error}` });
+    req.flash('error', `Internal Server Error: ${error}`);
+    return res.redirect('/home');
   }
 });
 
-
-
-router.get('/product/:id',isLoggedIn,async(req,res)=>{
+router.get('/product/:id', isLoggedIn, async (req, res) => {
   try {
-    const {id} = req.params;
-  const item = await Product.findById(id).populate('reviews');
-  res.render('show',{item});
+    const { id } = req.params;
+    const item = await Product.findById(id).populate('reviews');
+    if (!item) {
+      req.flash('error', 'Product not found');
+      return res.redirect('/home');
+    }
+    res.render('show', { item });
   } catch (e) {
-    res.render('error',{err:e.message});
+    req.flash('error', e.message);
+    res.render('error', { err: e.message });
   }
-  
-})
+});
 
-router.patch('/product/:id',isLoggedIn, async (req,res)=>{
+router.patch('/product/:id', isLoggedIn,isSeller,isProductAuther, async (req, res) => {
   try {
-    const {name, price, image, description} = req.body;
-  const {id} = req.params;
-  await Product.findByIdAndUpdate(id,{name, price, image, description});
-  req.flash('success','Product Edited Successfully')
-  res.redirect(`/home`)
+    const { name, price, image, description } = req.body;
+    const { id } = req.params;
+    const updatedProduct = await Product.findByIdAndUpdate(id, { name, price, image, description });
+    if (!updatedProduct) {
+      req.flash('error', 'Product not found');
+      return res.redirect('/home');
+    }
+    req.flash('success', 'Product Updated Successfully');
+    res.redirect('/home');
   } catch (error) {
-    console.log(error);
-    res.redirect('/home')
+    console.error(error);
+    req.flash('error', 'Internal Server Error');
+    res.redirect('/home');
   }
-  
-})
+});
 
-router.post('/products',isLoggedIn, validateProduct, async (req, res) => {
+router.post('/products', isLoggedIn, isSeller, validateProduct, async (req, res) => {
   try {
-    const { name, image, price, description,author } = req.body;
-    await Product.create({ name, image, price, description,author:req.user._id });
-    res.cookie('name','wasi');
+    const { name, image, price, description, author } = req.body;
+    await Product.create({ name, image, price, description, author: req.user._id });
+    req.flash('success', 'Product Created Successfully');
     res.redirect('/home');
   } catch (error) {
     console.error("Error creating product:", error);
+    req.flash('error', 'Internal Server Error');
     res.status(500).send("Internal Server Error");
   }
 });
 
-router.delete('/product/:id/delete',isLoggedIn, async (req,res)=>{
+router.delete('/product/:id/delete', isLoggedIn,isSeller,isProductAuther, async (req, res) => {
   try {
-    const {id} = req.params;
-  const product = await Product.findById(id);
-  for(let item of product.reviews){
-    await Review.findByIdAndDelete(item._id);
-  };
-  await Product.findByIdAndDelete(id);
-  res.redirect('/home');
+    const { id } = req.params;
+    const product = await Product.findById(id);
+    if (!product) {
+      req.flash('error', 'Product not found');
+      return res.redirect('/home');
+    }
+
+    for (let item of product.reviews) {
+      await Review.findByIdAndDelete(item._id);
+    }
+    await Product.findByIdAndDelete(id);
+    res.redirect('/home');
   } catch (error) {
     console.log(error);
-  } 
-})
+    req.flash('error', 'Internal Server Error');
+    res.redirect('/home');
+  }
+});
 
 module.exports = router;
