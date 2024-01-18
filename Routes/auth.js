@@ -7,13 +7,21 @@ router.get('/signup',(req,res)=>{
     res.render('auth/signup')
 })
 
-router.post('/signup',async (req,res)=>{
-    console.log(req.body)
-    let {username,password,role,email} = req.body;
-    const user = new User({username,role,email})
-    let newUser  = await User.register(user,password)
-    res.redirect('/login')
-})
+router.post('/signup', async (req, res) => {
+    const { username, password, options, email } = req.body;
+    let role;
+    if (options === 'buyer') {
+        role = 'buyer';
+    } else if (options === 'seller') {
+        role = 'seller';
+    } else {
+        role = 'defaultRole';
+    }
+
+    const user = new User({ username, role, email });
+    let newUser = await User.register(user, password);
+    res.redirect('/login');
+});
 
 router.get('/login',(req,res)=>{
     res.render('auth/login')

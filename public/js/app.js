@@ -1,3 +1,5 @@
+
+
 // ---------Responsive-navbar-active-animation-----------
 function test() {
     var tabsNewAnim = $("#navbarSupportedContent");
@@ -79,4 +81,3 @@ function test() {
       }, false)
     })
   })()
-  

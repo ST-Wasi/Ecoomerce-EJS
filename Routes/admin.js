@@ -15,7 +15,6 @@ router.post('/admin/dashboard/create/user',async (req,res)=>{
     await Admin.create({email,password:hashedPassword});
     return res.status(200).json({message: "Admin Registered Sucesfully"});
     } catch (error) {
-        console.log(error);
         return res.status(500).json({message: "Internal server err"});
     }
     

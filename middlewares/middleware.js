@@ -9,7 +9,6 @@ const verifyToken = async (req, res, next) => {
     if (!token) return res.status(401).render('needLogin');
       const payload = await jwt.verify(token, process.env.SECRET_KEY);
       if (payload) {
-        console.log(payload)
         req.user = payload;
         next();
       } else {
@@ -47,11 +46,19 @@ const validateReview = (req, res, next) => {
 };
 
 const isLoggedIn = (req,res,next)=>{
-  if(!req.isAuthenticated()){
-    req.flash('error','You Are Not Loggedin. PLease Login');
-    res.redirect('/login')
+  try {
+    if(req.xhr && !req.isAuthenticated()){
+      return res.status(401).json({ msg: "You Need To Login First" });
+    }
+    if(!req.isAuthenticated()){
+      req.flash('error','You Are Not Loggedin. PLease Login');
+      return res.redirect('/login')
+    }
+    next();
+  } catch (error) {
+    console.error(error)
   }
-  next();
+  
 }
 
 const isSeller = (req, res, next) => {
@@ -80,9 +87,7 @@ const isProductAuther = async (req,res,next)=>{
 
 const isProductInCart = async (req,res,next)=>{
   const {id} = req.params;
-  console.log(id);
-  console.log("user",req.user)
-  console.log(id.equals(req.user._id))
+
   next();
 }
 

@@ -136,7 +136,6 @@ router.delete(
       await Product.findByIdAndDelete(id);
       res.redirect("/home");
     } catch (error) {
-      console.log(error);
       req.flash("error", "Internal Server Error");
       res.redirect("/home");
     }
@@ -153,7 +152,6 @@ router.post("/product/:id/cart", async (req, res) => {
     req.flash("success", "Product Added To Cart");
     return res.redirect("/home");
   } catch (error) {
-    console.log(error);
     req.flash("error", "Internal Server Error");
     return res.redirect("/home");
   }
