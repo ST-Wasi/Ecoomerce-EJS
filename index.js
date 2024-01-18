@@ -10,6 +10,7 @@ const globalRoutes = require('./Routes/global');
 const cookieParser = require('cookie-parser')
 const authRoutes = require('./Routes/auth')
 const reviewRoutes = require('./Routes/review')
+const ProductAPI = require('./Routes/api/ProductAPI')
 const passport = require('passport')
 const LocalStrategy = require('passport-local')
 const User = require("./models/User");
@@ -71,3 +72,4 @@ app.use(productRoutes);
 app.use(globalRoutes);
 app.use(reviewRoutes);
 app.use(authRoutes);
+app.use(ProductAPI);
