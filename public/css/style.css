@@ -2576,3 +2576,11 @@ html{
 .cart-sup-number{
   cursor: pointer;
 }
+.cart-btn-delete{
+  background-color: white;
+  border: none;
+  color: black;
+}
+.cart-btn-delete i{
+  color: black;
+}

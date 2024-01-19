@@ -7,6 +7,7 @@ const methodoverride = require("method-override");
 const mongoose = require("mongoose");
 const productRoutes = require("./Routes/product");
 const globalRoutes = require('./Routes/global');
+const cartRoutes = require('./Routes/cart')
 const cookieParser = require('cookie-parser')
 const authRoutes = require('./Routes/auth')
 const reviewRoutes = require('./Routes/review')
@@ -73,3 +74,4 @@ app.use(globalRoutes);
 app.use(reviewRoutes);
 app.use(authRoutes);
 app.use(ProductAPI);
+app.use(cartRoutes);

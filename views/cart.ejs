@@ -27,30 +27,40 @@
                   </div>
   
                   <% for(let item of user.cart){ %>
-                  <div class="card mb-3">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between">
-                              <div class="d-flex flex-row align-items-center">
-                                <div>
-                                  <img
-                                    src="<%=item.image%>"
-                                    class="img-fluid rounded-3" alt="Shopping item" style="width: 65px;">
-                                </div>
-                                <div class="ms-3">
-                                  <h5><%=item.name%></h5>
-                                  <p class="small mb-0"><%=item.description%></p>
-                                </div>
-                              </div>
-                              <div class="d-flex flex-row align-items-center">
-                                <div style="width: 80px;">
-                                  <h5 class="mb-0">₹<%=item.price%></h5>
-                                </div>
-                                <a href="#!" style="color: #cecece;"><i class="fas fa-trash-alt"></i></a>
-                              </div>
+                    <div class="card mb-3">
+                      <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                          <div class="d-flex flex-row align-items-center">
+                            <div>
+                              <img
+                                src="<%=item.product.image%>"
+                                class="img-fluid rounded-3" alt="Shopping item" style="width: 65px;">
+                            </div>
+                            <div class="ms-3">
+                              <h5><%=item.product.name%></h5>
+                              <p class="small mb-0"><%=item.product.description%></p>
                             </div>
                           </div>
+                          <div class="d-flex flex-row align-items-center">
+                            <div style="width: 80px;">
+                              <h5 class="mb-0">₹<%=item.product.price%></h5>
+                            </div>
+                            <div class="input-group w-auto justify-content-end align-items-center">
+                              <input type="button" value="-" class="button-minus border rounded-circle icon-shape icon-sm mx-1 lh-0" data-field="quantity">
+                              <input type="number" step="1" max="10" value="<%=item.quantity%>" name="quantity" class="quantity-field border-0 text-center w-25">
+                              <input type="button" value="+" class="button-plus border rounded-circle icon-shape icon-sm lh-0" data-field="quantity">
+                            </div>
+                            &nbsp;
+                            &nbsp;
+                            <form action="/cart/<%=item.product._id%>/delete" method="post">
+                              <button class="cart-btn-delete" href="#!" style="color: #cecece;"><i class="fas fa-trash-alt"></i></button>
+                            </form>
+                          </div>
+                        </div>
                       </div>
-                   <% } %>
+                    </div>
+                  <% } %>                  
+                   <h4>Total Cart Value: <%=totalAmount%></h4>
             </div>
           </div>
         </div>
