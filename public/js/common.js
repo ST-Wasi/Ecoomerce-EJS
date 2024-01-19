@@ -1,4 +1,25 @@
 const allTheLikeButtons = document.querySelectorAll('.like-btn');
+const plusButton = document.querySelector('.button-plus')
+const quantity = document.querySelector('.quantity');
+const totalCartValue = document.querySelector('.totalCartValue');
+
+async function increaseQty(productId,plusButton){
+    try {
+        const response = await axios({
+            method: 'post',
+            url: `/product/${productId}/cart`,
+            headers:{
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+        quantity.value++;
+    } catch (error) {
+        if(error.response.status === 401){
+            window.location.replace('/login');
+            console.log(error.message , 'error hai ye window vaali line ka')
+        }
+    }
+}
 
 async function likeButton(productId,btn){
     try {
@@ -31,3 +52,9 @@ for(let btn of allTheLikeButtons){
         likeButton(productId,btn);
     })
 }
+
+plusButton.addEventListener('click',()=>{
+    console.log('plus buttonclicked')
+    const productId = plusButton.getAttribute('productId')
+    increaseQty(productId,plusButton)
+})

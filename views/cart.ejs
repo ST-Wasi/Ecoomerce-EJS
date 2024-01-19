@@ -47,8 +47,8 @@
                             </div>
                             <div class="input-group w-auto justify-content-end align-items-center">
                               <input type="button" value="-" class="button-minus border rounded-circle icon-shape icon-sm mx-1 lh-0" data-field="quantity">
-                              <input type="number" step="1" max="10" value="<%=item.quantity%>" name="quantity" class="quantity-field border-0 text-center w-25">
-                              <input type="button" value="+" class="button-plus border rounded-circle icon-shape icon-sm lh-0" data-field="quantity">
+                              <input type="number" step="1" max="10" value="<%=item.quantity%>" name="quantity" class="quantity quantity-field border-0 text-center w-25" aria-disabled="true" disabled>
+                              <input productId="<%=item.product._id%>" type="button" value="+" class="button-plus border rounded-circle icon-shape icon-sm lh-0" data-field="quantity">
                             </div>
                             &nbsp;
                             &nbsp;
@@ -60,12 +60,12 @@
                       </div>
                     </div>
                   <% } %>                  
-                   <h4>Total Cart Value: <%=totalAmount%></h4>
+                   <h4>Total Cart Value:<span class="totalCartValue"><%=totalAmount%></span></h4>
             </div>
           </div>
         </div>
       </div>
     </div>
   </section>
-  
+  <script src="js/common.js"></script>
 <%-include('./partials/footer')%>

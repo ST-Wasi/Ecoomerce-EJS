@@ -136,7 +136,7 @@ router.delete(
       }
       await Product.findByIdAndDelete(id);
       const user = req.user;
-      await User.findByIdAndUpdate(user._id, { $pull: { cart: id } });
+      await User.findByIdAndUpdate(user._id, { $pull: { cart: {product: id} } });
       await User.findByIdAndUpdate(user._id, { $pull: { wishlist: id } });
       res.redirect("/home");
     } catch (error) {
