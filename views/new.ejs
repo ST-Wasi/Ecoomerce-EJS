@@ -14,8 +14,8 @@
     </div>
 
     <div class="mb-3">
-      <label for="validationForPrice" class="form-label">Image</label>
-      <input type="text" class="form-control" id="validationForPrice" name="image" required>
+      <label for="validationForImage" class="form-label">Image</label>
+      <input type="text" class="form-control" id="validationForImage" name="image" required>
       <div class="valid-feedback">
         Looks good!
       </div>
@@ -34,6 +34,20 @@
         </div>
         <div class="invalid-feedback">
           Please choose A Good Price.
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="validationForQuantity" class="form-label">Quantity</label>
+      <div class="input-group has-validation">
+        <span class="input-group-text" id="inputGroupPrepend">Qty</span>
+        <input type="number" class="form-control" name="quantity" id="validationForQuantity" aria-describedby="inputGroupPrepend" required>
+        <div class="valid-feedback">
+          Looks good!
+        </div>
+        <div class="invalid-feedback">
+          Please choose Product Quantity.
         </div>
       </div>
     </div>

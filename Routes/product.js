@@ -98,11 +98,12 @@ router.post(
   validateProduct,
   async (req, res) => {
     try {
-      const { name, image, price, description, author } = req.body;
+      const { name, image, price, description, author, quantity } = req.body;
       await Product.create({
         name,
         image,
         price,
+        quantity,
         description,
         author: req.user._id,
       });
@@ -134,32 +135,17 @@ router.delete(
         await Review.findByIdAndDelete(item._id);
       }
       await Product.findByIdAndDelete(id);
+      const user = req.user;
+      await User.findByIdAndUpdate(user._id, { $pull: { cart: id } });
+      await User.findByIdAndUpdate(user._id, { $pull: { wishlist: id } });
       res.redirect("/home");
     } catch (error) {
-      req.flash("error", "Internal Server Error");
+      req.flash("error", "Internal Server Error", error);
       res.redirect("/home");
     }
   }
 );
 
-router.post("/product/:id/cart", async (req, res) => {
-  try {
-    const { id } = req.params;
-    const product = await Product.findById(id);
-    const user = req.user;
-    user.cart.push(product);
-    await user.save();
-    req.flash("success", "Product Added To Cart");
-    return res.redirect("/home");
-  } catch (error) {
-    req.flash("error", "Internal Server Error");
-    return res.redirect("/home");
-  }
-});
 
-router.get('/cart', async(req,res)=>{
-  const user = await req.user.populate('cart');
-  res.render('cart',{user});
-})
 
 module.exports = router;
