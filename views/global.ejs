@@ -1,30 +1,46 @@
-<%-include('./partials/header')%>
-<%-include('./partials/navbar')%>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-            <a class="navbar-brand" href="#">Wasi</a>
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/home">Home</a>
-              </li>
-            </ul>
-            <div class="d-flex">
-              <a class="btn btn-outline-success" href="/login">Login/Signup</a>
+<%-include('partials/header')%>
+<%-include('partials/navbar')%>
+    <header id = "header" class = "vh-100 carousel slide" data-bs-ride = "carousel" style = "padding-top: 104px;">
+        <div class = "container h-100 d-flex align-items-center carousel-inner">
+            <div class = "text-center carousel-item active">
+                <h2 class = "text-capitalize text-white">Best collection</h2>
+                <h1 class = "text-uppercase py-2 fw-bold text-white">New Year Arrivals</h1>
+                <a href = "/home" class = "btn mt-3 text-uppercase">shop now</a>
             </div>
-          </div>
+            <div class = "text-center carousel-item">
+                <h2 class = "text-capitalize text-white">best price & offer</h2>
+                <h1 class = "text-uppercase py-2 fw-bold text-white">Winter Sale</h1>
+                <a href = "/home" class = "btn mt-3 text-uppercase">View Offers</a>
+            </div>
         </div>
-      </nav>
-      <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light hfullvh">
-        <div class="col-md-5 p-lg-5 mx-auto my-5">
-          <h1 class="display-4 font-weight-normal">Wasi's First Templating Ecommerce Web App</h1>
-          <p class="lead font-weight-normal">And an even wittier subheading to boot. Jumpstart your marketing efforts with this example based on Apple's marketing pages.</p>
-          <a class="btn btn-outline-secondary" href="/login">Get Started</a>
+
+        <button class = "carousel-control-prev" type = "button" data-bs-target="#header" data-bs-slide = "prev">
+            <span class = "carousel-control-prev-icon"></span>
+        </button>
+        <button class = "carousel-control-next" type = "button" data-bs-target="#header" data-bs-slide = "next">
+            <span class = "carousel-control-next-icon"></span>
+        </button>
+    </header>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<div class = "title text-center py-5">
+  <h2 class = "position-relative d-inline-block">Sale</h2>
+</div>
+    <section id = "offers" class = "py-5">
+        <div class = "container">
+            <div class = "row d-flex align-items-center justify-content-center text-center justify-content-lg-start text-lg-start">
+                <div class = "offers-content">
+                    <span class = "text-white">Discount Up To 40%</span>
+                    <h2 class = "mt-2 mb-4 text-white">Grand Sale Offer!</h2>
+                    <a href = "/home" class = "btn">Buy Now</a>
+                </div>
+            </div>
         </div>
-        <div class="product-device box-shadow d-none d-md-block"></div>
-        <div class="product-device product-device-2 box-shadow d-none d-md-block"></div>
-      </div>
+    </section>
+    <!-- isotope js -->
+    <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
+    <!-- bootstrap js -->
+    <script src = "bootstrap-5.0.2-dist/js/bootstrap.min.js"></script>
+    <!-- custom js -->
+    <script src = "js/script.js"></script>
 <%-include('./partials/footer')%>
