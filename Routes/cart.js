@@ -3,6 +3,7 @@ const Product = require("../models/Product");
 const { isLoggedIn } = require("../middlewares/middleware");
 const User = require("../models/User");
 const router = express.Router();
+const stripe = require('stripe')('sk_test_51OaYE8SDey9MYA4smLWNGVqs1NIhoDOZk0MvW52f2pdcCIrnN0nEvp6y6TVy81WcF540cO6IgpFE8A4m0lClxtYn00WNR0lx6N')
 
 router.post("/product/:id/cart", isLoggedIn, async (req, res) => {
   try {
@@ -27,15 +28,43 @@ router.post("/product/:id/cart", isLoggedIn, async (req, res) => {
     return res.redirect("/home");
   }
 });
+router.get("/cart", isLoggedIn, async (req, res) => {
+  const user = await req.user.populate("cart.product");
+  const totalAmount = user.cart.reduce(
+    (Accumulator, curr) => Accumulator + (curr.product.price*curr.quantity),
+    0
+  );
+  res.render("cart", { user, totalAmount });
+});
   
-  router.get("/cart", isLoggedIn, async (req, res) => {
-    const user = await req.user.populate("cart.product");
-    const totalAmount = user.cart.reduce(
-      (Accumulator, curr) => Accumulator + (curr.product.price*curr.quantity),
-      0
-    );
-    res.render("cart", { user, totalAmount });
-  });
+router.get('/checkout', async (req, res) => {
+  try {
+    const user = await req.user.populate('cart.product');
+    const lineItems = user.cart.map((cartItem) => ({
+      price_data: {
+        currency: 'inr',
+        product_data: {
+          name: cartItem.product.name,
+        },
+        unit_amount: cartItem.product.price * 100,
+      },
+      quantity: cartItem.quantity,
+    }));
+
+    const session = await stripe.checkout.sessions.create({
+      line_items: lineItems,
+      mode: 'payment',
+      success_url: 'http://localhost:4242/success',
+      cancel_url: 'http://localhost:4242/cancel',
+    });
+
+    res.redirect(303, session.url);
+  } catch (error) {
+    console.error(error);
+    req.flash('error', 'Error generating checkout session');
+    res.redirect('/cart');
+  }
+});
   
   router.post("/cart/:id/delete", async (req, res) => {
     try {
