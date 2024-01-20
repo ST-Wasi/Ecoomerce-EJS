@@ -1,6 +1,4 @@
 
-
-// ---------Responsive-navbar-active-animation-----------
 function test() {
     var tabsNewAnim = $("#navbarSupportedContent");
     var selectorNewAnim = $("#navbarSupportedContent").find("li").length;
@@ -47,9 +45,8 @@ function test() {
     });
   });
   
-  // --------------add active class-on another-page move----------
   jQuery(document).ready(function ($) {
-    // Get current path and find target link
+
     var path = window.location.pathname.split("/").pop();
   
 
@@ -58,7 +55,6 @@ function test() {
     }
   
     var target = $('#navbarSupportedContent ul li a[href="' + path + '"]');
-    // Add active class to target link
     target.parent().addClass("active");
   });
   
@@ -66,10 +62,8 @@ function test() {
   (() => {
     'use strict'
   
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
     const forms = document.querySelectorAll('.needs-validation')
   
-    // Loop over them and prevent submission
     Array.from(forms).forEach(form => {
       form.addEventListener('submit', event => {
         if (!form.checkValidity()) {
