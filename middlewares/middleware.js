@@ -85,10 +85,13 @@ const isProductAuther = async (req,res,next)=>{
   next();
 }
 
-const isProductInCart = async (req,res,next)=>{
-  const {id} = req.params;
-
+const isVeryfiedSeller = async (req,res,next)=>{
+  const user = req.user;
+  if(!req.user.isVeryfiedSeller){
+    req.flash('error','You are still not verified. Please wait for the verifiacation or contact admin')
+    return res.redirect('/home');
+  }
   next();
 }
 
-module.exports = {verifyToken,validateProduct,validateReview,isLoggedIn,isSeller,isProductAuther,isProductInCart};
+module.exports = {verifyToken,validateProduct,validateReview,isLoggedIn,isSeller,isProductAuther,isVeryfiedSeller};

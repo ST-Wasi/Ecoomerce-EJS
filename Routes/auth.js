@@ -8,7 +8,8 @@ router.get('/signup',(req,res)=>{
 })
 
 router.post('/signup', async (req, res) => {
-    const { username, password, options, email } = req.body;
+    try{
+        const { username, password, options, email,isVeryfiedSeller } = req.body;
     let role;
     if (options === 'buyer') {
         role = 'buyer';
@@ -18,9 +19,20 @@ router.post('/signup', async (req, res) => {
         role = 'defaultRole';
     }
 
-    const user = new User({ username, role, email });
-    let newUser = await User.register(user, password);
+    const user = new User({ username, role, email, isVeryfiedSeller });
+    if(options === 'buyer'){
+        req.flash('success','Buyer Account Created Sucessfully')
+    } else if(options === 'seller'){
+        req.flash('success','Seller Account Created. You Can Add Products Once Veryfied By Admin. Thankyou For Your Patience')
+    }
+    await User.register(user, password);
     res.redirect('/login');
+    }
+    catch(error){
+        req.flash('error','Internal server Error While Creating Accunt');
+        res.status(500).send(`Internal Server Error ${error}`)
+    }
+    
 });
 
 router.get('/login',(req,res)=>{
@@ -39,10 +51,16 @@ function(req,res){
 );
 
 router.get('/logout',(req,res)=>{
-    req.logout(()=>{
-        req.flash("success",'loged out sucesfully')
-    })
-    res.redirect('/login')
+    try {
+        req.logout(()=>{
+            req.flash("success",'loged out sucesfully')
+        })
+        res.redirect('/login')
+    } catch (error) {
+        req.flash('error','Error Logging out Plas Try Again After Hard Refresh')
+        res.status(500)
+    }
+    
 })
 
 module.exports = router;
