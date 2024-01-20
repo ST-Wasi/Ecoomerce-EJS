@@ -91,7 +91,7 @@ router.patch(
       res.redirect("/home");
     }
   }
-  
+
 );
 
 router.post(
@@ -102,6 +102,7 @@ router.post(
   validateProduct,
   async (req, res) => {
     try {
+      
       const { name, image, price, description, author, quantity } = req.body;
       await Product.create({
         name,
