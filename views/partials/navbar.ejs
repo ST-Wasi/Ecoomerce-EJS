@@ -48,7 +48,7 @@
         <li class="nav-item px-2 py-2">
           <a class="nav-link text-uppercase text-dark" href="/">home</a>
         </li>
-        <%if(currentUser && currentUser.role === 'seller'){%>
+        <%if(currentUser && currentUser.role === 'seller' && currentUser.isVeryfiedSeller){ %>
         <li class="nav-item px-2 py-2">
           <a class="nav-link text-uppercase text-dark" href="/product/new"
             >New</a

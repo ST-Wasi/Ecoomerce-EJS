@@ -23,6 +23,10 @@ const userSchema = new mongoose.Schema({
         default: 'buyer',
         required: true
     },
+    isVeryfiedSeller: {
+        type: Boolean,
+        default: 'false',
+    },
     cart: [cartItemSchema],
     wishlist: [{
         type: mongoose.Schema.Types.ObjectId,
