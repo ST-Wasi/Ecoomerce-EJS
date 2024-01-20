@@ -3,8 +3,8 @@
 <%-include('./partials/flash')%>
 
 <div class="product-list-card-parent">
-  <div class="card" style="width: 18rem">
-    <img src="<%=item.image%>" class="card-img-top" alt="<%=item.name%>" />
+  <div class="card wasistyle wstyleshowjs" style="width: 18rem">
+    <img src="<%=item.image%>" class="card-img-top semi-circle" alt="<%=item.name%>" />
     <div class="card-body">
       <h5 class="card-title"><%=item.name%></h5>
       <h5 class="card-title"><%=item.price%></h5>
@@ -15,7 +15,7 @@
         <button class="btn btn-primary" type="submit">Delete Product</button>
         <%}%>
       </form>
-      <form class="container" action="/product/<%=item._id%>/cart" method="post">
+      <form class="container frm-btn" action="/product/<%=item._id%>/cart" method="post">
         <button class="btn btn-primary">Add To Cart</button>
       </form>
     </div>
@@ -71,3 +71,5 @@
 </form>
 </div>
 <%-include('./partials/footerbar')%>
+
+

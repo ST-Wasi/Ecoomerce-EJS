@@ -23,7 +23,7 @@ mongoose
     console.group("connected to Database");
     let PORT = 8080;
     app.listen(PORT, () => {
-      console.log(`listening to the port: ${PORT}`);
+      console.log(`listening to the port: http://localhost:${PORT}`);
     });
   })
   .catch((err) => {

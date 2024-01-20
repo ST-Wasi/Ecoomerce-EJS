@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Kaisei+Tokumin:wght@400;500;700&family=Poppins:wght@300;400;500&display=swap');
-
 :root{
     --lg-font: 'Kaisei Tokumin', serif;
     --sm-font: 'Poppins', sans-serif;
@@ -2830,4 +2829,11 @@ footer a:hover{
 .review-card-parent{
   display: grid;
   grid-template-columns: 2fr 2fr 2fr;
+}
+.frm-btn{
+  display: flex;
+  justify-content: center;
+}
+.wstyleshowjs{
+  margin-top: 150px;
 }
