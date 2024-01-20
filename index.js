@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require("path");
 const app = express();
+const dotenv = require('dotenv').config();
 const session = require('express-session')
 const flash = require('connect-flash');
 const methodoverride = require("method-override");
@@ -16,12 +17,13 @@ const passport = require('passport')
 const LocalStrategy = require('passport-local')
 const User = require("./models/User");
 
+const uri = process.env.ATLAS_URL
 // db connect
 mongoose
-  .connect("mongodb://127.0.0.1:27017/Ecom")
+  .connect(uri)
   .then(() => {
     console.group("connected to Database");
-    let PORT = 8080;
+    let PORT = process.env.PORT
     app.listen(PORT, () => {
       console.log(`listening to the port: http://localhost:${PORT}`);
     });

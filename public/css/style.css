@@ -2837,3 +2837,8 @@ footer a:hover{
 .wstyleshowjs{
   margin-top: 150px;
 }
+.checkout{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
