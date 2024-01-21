@@ -10,13 +10,13 @@ const productRoutes = require("./Routes/product");
 const globalRoutes = require('./Routes/global');
 const cartRoutes = require('./Routes/cart')
 const cookieParser = require('cookie-parser')
+const adminRoutes = require('./Routes/admin')
 const authRoutes = require('./Routes/auth')
 const reviewRoutes = require('./Routes/review')
 const ProductAPI = require('./Routes/api/ProductAPI')
 const passport = require('passport')
 const LocalStrategy = require('passport-local')
 const User = require("./models/User");
-const Admin = require("./models/Admin");
 
 const uri = process.env.ATLAS_URL
 // db connect
@@ -61,12 +61,8 @@ app.use(flash());
 app.use(passport.initialize())
 app.use(passport.session())
 passport.serializeUser(User.serializeUser());
-// passport.serializeUser(Admin.serializeUser());
 passport.deserializeUser(User.deserializeUser());
-// passport.deserializeUser(Admin.deserializeUser());
-
 passport.use(new LocalStrategy(User.authenticate()));
-// passport.use(new LocalStrategy(Admin.authenticate()));
 
 app.use((req,res,next)=>{
   res.locals.currentUser = req.user;
@@ -81,3 +77,4 @@ app.use(reviewRoutes);
 app.use(authRoutes);
 app.use(ProductAPI);
 app.use(cartRoutes);
+app.use(adminRoutes);

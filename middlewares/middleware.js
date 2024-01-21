@@ -97,7 +97,7 @@ const isVeryfiedSeller = async (req,res,next)=>{
 const isAdmin = async(req,res,next)=>{
   if(!req.user.isAdmin){
     req.flash('You are not authorized to acces this page');
-    res.redirect('/home');
+    return res.redirect('/home');
   }
   next();
 }
