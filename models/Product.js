@@ -27,6 +27,26 @@ const productSchema = new mongoose.Schema({
     trim: true,
     required: true,
   },
+  isNewItem: {
+    type: Boolean,
+    default: 'true'
+  },
+  isPopularItem: {
+    type: Boolean,
+    default: 'true'
+  },
+  isInSaleItem: {
+    type: Boolean,
+    default: 'true'
+  },
+  isInStock: {
+    type: Boolean,
+    default: 'true'
+  },
+  category: {
+    type: String,
+    required: true,
+  },
   reviews: [
     {
       type: mongoose.Schema.Types.ObjectId,

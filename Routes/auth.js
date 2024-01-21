@@ -9,7 +9,7 @@ router.get('/signup',(req,res)=>{
 
 router.post('/signup', async (req, res) => {
     try{
-        const { username, password, options, email,isVeryfiedSeller } = req.body;
+        const { username, password, options, email,isVeryfiedSeller,isAdmin } = req.body;
     let role;
     if (options === 'buyer') {
         role = 'buyer';
@@ -19,7 +19,7 @@ router.post('/signup', async (req, res) => {
         role = 'defaultRole';
     }
 
-    const user = new User({ username, role, email, isVeryfiedSeller });
+    const user = new User({ username, role, email, isVeryfiedSeller,isAdmin });
     if(options === 'buyer'){
         req.flash('success','Buyer Account Created Sucessfully')
     } else if(options === 'seller'){
