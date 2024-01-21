@@ -94,4 +94,12 @@ const isVeryfiedSeller = async (req,res,next)=>{
   next();
 }
 
-module.exports = {verifyToken,validateProduct,validateReview,isLoggedIn,isSeller,isProductAuther,isVeryfiedSeller};
+const isAdmin = async(req,res,next)=>{
+  if(!req.user.isAdmin){
+    req.flash('You are not authorized to acces this page');
+    res.redirect('/home');
+  }
+  next();
+}
+
+module.exports = {verifyToken,validateProduct,validateReview,isLoggedIn,isSeller,isProductAuther,isVeryfiedSeller,isAdmin};
