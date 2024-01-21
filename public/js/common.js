@@ -21,6 +21,11 @@ async function increaseQty(productId,plusButton){
     }
 }
 
+function selectCategory(category) {
+    document.getElementById('selectedCategory').value = category;
+    document.getElementById('btnGroupDrop1').innerText = 'Category: ' + category;
+  }
+
 async function likeButton(productId,btn){
     try {
         const response = await axios({

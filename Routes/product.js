@@ -91,6 +91,7 @@ router.patch(
       res.redirect("/home");
     }
   }
+
 );
 
 router.post(
@@ -101,13 +102,19 @@ router.post(
   validateProduct,
   async (req, res) => {
     try {
-      const { name, image, price, description, author, quantity } = req.body;
+      
+      const { name, image, price, description, author, quantity,isInStock,isInSaleItem,isPopularItem,isNewItem,category } = req.body;
       await Product.create({
         name,
         image,
         price,
         quantity,
         description,
+        isInStock,
+        isInSaleItem,
+        isPopularItem,
+        isNewItem,
+        category: category[1],
         author: req.user._id,
       });
       req.flash("success", "Product Created Successfully");

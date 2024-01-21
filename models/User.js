@@ -27,6 +27,10 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: 'false',
     },
+    isAdmin: {
+        type: Boolean,
+        default: 'false',
+    },
     cart: [cartItemSchema],
     wishlist: [{
         type: mongoose.Schema.Types.ObjectId,

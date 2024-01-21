@@ -10,7 +10,7 @@
       <h5 class="card-title"><%=item.price%></h5>
       <p class="card-text"><%=item.description%></p>
       <a href="/home" class="btn btn-primary">Return Hone</a>
-      <form action="/product/<%=item._id%>/delete?_method=DELETE" method="post">
+      <form class="container frm-btn" action="/product/<%=item._id%>/delete?_method=DELETE" method="post">
         <%if(currentUser && currentUser.role === 'seller'){%>
         <button class="btn btn-primary" type="submit">Delete Product</button>
         <%}%>
@@ -34,8 +34,8 @@
   
 
 </div>
-<form action="/review/<%=item._id%>/new" method="post">
-  <label for="rating">Rating: </label>
+<form class="review-form wasistyle mt-5" action="/review/<%=item._id%>/new" method="post">
+  <label for="rating">Your Feedback Makes Us Better Every Day</label>
   <fieldset class="starability-basic">
     <input
       type="radio"
@@ -61,13 +61,14 @@
   <label for="comment">Comment: </label>
   <input
     type="text"
+    class="form-control"
     id="comment"
     name="comment"
     placeholder="Enter your comment"
     required
   />
 
-  <button>Submit Review</button>
+  <button class="btn btn-primary" type="submit" data-feild="button">Submit Review</button>
 </form>
 </div>
 <%-include('./partials/footerbar')%>

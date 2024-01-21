@@ -10,6 +10,7 @@ const productRoutes = require("./Routes/product");
 const globalRoutes = require('./Routes/global');
 const cartRoutes = require('./Routes/cart')
 const cookieParser = require('cookie-parser')
+const adminRoutes = require('./Routes/admin')
 const authRoutes = require('./Routes/auth')
 const reviewRoutes = require('./Routes/review')
 const ProductAPI = require('./Routes/api/ProductAPI')
@@ -61,7 +62,6 @@ app.use(passport.initialize())
 app.use(passport.session())
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
-
 passport.use(new LocalStrategy(User.authenticate()));
 
 app.use((req,res,next)=>{
@@ -77,3 +77,4 @@ app.use(reviewRoutes);
 app.use(authRoutes);
 app.use(ProductAPI);
 app.use(cartRoutes);
+app.use(adminRoutes);

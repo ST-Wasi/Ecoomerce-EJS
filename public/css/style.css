@@ -2842,3 +2842,10 @@ footer a:hover{
   flex-direction: row;
   justify-content: space-evenly;
 }
+.review-form{
+  display: grid;
+  place-content: center;
+  gap: 7px;
+  place-items: center;
+  margin-bottom: 10px;
+}
