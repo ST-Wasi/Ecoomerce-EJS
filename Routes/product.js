@@ -117,7 +117,7 @@ router.post(
   async (req, res) => {
 
     try {
-      const { name, price, description, author, quantity,isInStock,isInSaleItem,isPopularItem,isNewItem,category } = req.body;
+      const { name, price, description, quantity,isInStock,isInSaleItem,isPopularItem,isNewItem,category } = req.body;
       await Product.create({
         name,
         image: req.file.filename,
