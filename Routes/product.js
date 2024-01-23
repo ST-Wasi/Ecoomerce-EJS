@@ -19,7 +19,6 @@ const storage = multer.diskStorage({
   filename: function (req, file, cb) {
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
     const filesname = file.originalname.split(' ').join("_");
-    console.log(filesname)
     return cb(null, uniqueSuffix + filesname)
   }
 })
@@ -119,8 +118,6 @@ router.post(
 
     try {
       const { name, price, description, author, quantity,isInStock,isInSaleItem,isPopularItem,isNewItem,category } = req.body;
-      // const {image} = req.file;
-      console.log(req.file);
       await Product.create({
         name,
         image: req.file.filename,
