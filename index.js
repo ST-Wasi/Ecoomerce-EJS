@@ -51,7 +51,7 @@ app.set("views", path.join(__dirname, "views"));
 
 //middleware
 app.use(express.static(path.join(__dirname, "public")));
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(methodoverride("_method"));
 app.use(cookieParser())

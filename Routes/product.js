@@ -10,7 +10,21 @@ const {
 } = require("../middlewares/middleware");
 const Review = require("../models/Review");
 const User = require("../models/User");
+const multer  = require('multer')
 
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    return cb(null, './public/images')
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+    const filesname = file.originalname.split(' ').join("_");
+    console.log(filesname)
+    return cb(null, uniqueSuffix + filesname)
+  }
+})
+
+const upload = multer({ storage: storage })
 router.get(
   "/product/:id/edit",
   isLoggedIn,
@@ -96,17 +110,20 @@ router.patch(
 
 router.post(
   "/products",
+    upload.single('image'),
   isLoggedIn,
   isSeller,
   isVeryfiedSeller,
   validateProduct,
   async (req, res) => {
+
     try {
-      
-      const { name, image, price, description, author, quantity,isInStock,isInSaleItem,isPopularItem,isNewItem,category } = req.body;
+      const { name, price, description, author, quantity,isInStock,isInSaleItem,isPopularItem,isNewItem,category } = req.body;
+      // const {image} = req.file;
+      console.log(req.file);
       await Product.create({
         name,
-        image,
+        image: req.file.filename,
         price,
         quantity,
         description,

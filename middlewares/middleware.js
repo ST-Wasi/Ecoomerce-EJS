@@ -86,7 +86,6 @@ const isProductAuther = async (req,res,next)=>{
 }
 
 const isVeryfiedSeller = async (req,res,next)=>{
-  const user = req.user;
   if(!req.user.isVeryfiedSeller){
     req.flash('error','You are still not verified. Please wait for the verifiacation or contact admin')
     return res.redirect('/home');
